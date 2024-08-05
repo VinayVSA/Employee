@@ -34,7 +34,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public EmployeeBo createEmployee(EmployeeBo employeeBo) {
 		
-		Employee employee=EmployeeMapper.INSTANCE.toEntity(employeeBo);
+		Employee employee=employeeMapper.toEntity(employeeBo);
 
 		Employee createdEmployee=employeeRepository.save(employee);
 
@@ -46,7 +46,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		Employee emp= employeeRepository.findById(id).get();
 
-		return EmployeeMapper.INSTANCE.toBO(emp);
+		return employeeMapper.toBO(emp);
 	}
 
 	@Override
