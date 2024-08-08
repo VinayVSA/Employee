@@ -26,11 +26,11 @@ import com.cg.in.entities.Employee;
 import com.cg.in.entities.EmployeeBo;
 import com.cg.in.repository.EmployeeRepository;
 
-import lombok.extern.slf4j.Slf4j;
+
 
 //@MockitoSettings(strictness = Strictness.LENIENT)
 
-@Slf4j
+
 @ExtendWith(MockitoExtension.class)
 class EmployeeServiceImplTest {
 
@@ -57,11 +57,11 @@ class EmployeeServiceImplTest {
     @Test
     void testCreateEmployee() {
     
-      log.info("bo to entity");
+      //log.info("bo to entity");
       when(employeeMapper.toEntity(any(EmployeeBo.class))).thenReturn(employee);
-      log.info("save to the repo");
+     // log.info("save to the repo");
       when(employeeRepository.save(any(Employee.class))).thenReturn(employee);
-      log.info("entity to bo");
+     // log.info("entity to bo");
       when(employeeMapper.toBO(any(Employee.class))).thenReturn(employeeBo);
 
       
@@ -78,9 +78,9 @@ class EmployeeServiceImplTest {
 
     @Test
     void testGetEmployeeById() {
-    	log.info("retrieving by id");
+    	//log.info("retrieving by id");
         when(employeeRepository.findById(1)).thenReturn(Optional.of(employee));
-        log.info("entity to bo");
+       // log.info("entity to bo");
         when(employeeMapper.toBO(any(Employee.class))).thenReturn(employeeBo);
 
         EmployeeBo result = employeeService.getEmployeeById(1);

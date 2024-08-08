@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.in.converter.JaxbJsonConverter;
 import com.cg.in.entities.EmployeeBo;
 import com.cg.in.service.EmployeeServiceImpl;
 import com.cg.in.utils.constants.Utility;
@@ -28,6 +29,9 @@ import lombok.extern.slf4j.Slf4j;
 public class EmployeeController {
 	@Autowired
 	private EmployeeServiceImpl employeeService;
+	
+	@Autowired
+    private JaxbJsonConverter jaxbJsonConverter;
 
 	@PostMapping("/create")
 	public ResponseEntity<EmployeeBo> createEmployee(@Valid @RequestBody EmployeeBo employee)
@@ -54,5 +58,27 @@ public class EmployeeController {
 	        log.info("Health check endpoint hit");
 	        return new ResponseEntity<>("Service is up and running", HttpStatus.OK);
 	    }
+	 
+//	 @PostMapping("/convertToJson")
+//	    public ResponseEntity<String> convertToJson(@RequestBody EmployeeBo employee) {
+//	        try {
+//	            String json = jaxbJsonConverter.convertPojoToJson(employee);
+//	            return ResponseEntity.ok(json);
+//	        } catch (Exception e) {
+//	            return ResponseEntity.status(500).body("Error converting POJO to JSON: " + e.getMessage());
+//	        }
+//	    }
+//
+//	    @PostMapping("/convertToPojo")
+//	    public ResponseEntity<EmployeeBo> convertToPojo(@RequestBody String json) {
+//	        try {
+//	            EmployeeBo employee = jaxbJsonConverter.convertJsonToPojo(json);
+//	            return ResponseEntity.ok(employee);
+//	        } catch (Exception e) {
+//	            return ResponseEntity.status(500).body(null);
+//	        }
+//	    }
+
+	 
 
 }

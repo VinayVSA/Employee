@@ -52,6 +52,30 @@ dependencies {
     testImplementation 'io.cucumber:cucumber-junit:7.11.0'
     
     testImplementation 'org.junit.vintage:junit-vintage-engine:5.10.0'
+    
+    testImplementation 'com.github.tomakehurst:wiremock-jre8:2.32.0'
+    
+     testImplementation 'javax.servlet:javax.servlet-api:4.0.1'
+     
+    // Add Jetty dependencies
+    implementation 'org.eclipse.jetty:jetty-util:9.4.44.v20210927'
+    implementation 'org.eclipse.jetty:jetty-server:9.4.44.v20210927'
+    implementation 'org.eclipse.jetty:jetty-http:9.4.44.v20210927'
+    implementation 'org.eclipse.jetty:jetty-io:9.4.44.v20210927'
+    implementation 'org.eclipse.jetty:jetty-security:9.4.44.v20210927'
+    implementation 'org.eclipse.jetty:jetty-servlet:9.4.44.v20210927'
+    implementation 'org.eclipse.jetty:jetty-webapp:9.4.44.v20210927'
+
+    // JAXB dependencies
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.3'
+    implementation 'javax.activation:activation:1.1.1'
+
+    // Jackson dependencies for JSON conversion
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    implementation 'com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.15.2'
+
+
 }
 
 sourceSets {

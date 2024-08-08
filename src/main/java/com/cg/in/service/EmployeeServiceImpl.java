@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.in.EmployeeMapper;
+import com.cg.in.converter.JaxbJsonConverter;
 import com.cg.in.entities.Employee;
 import com.cg.in.entities.EmployeeBo;
 import com.cg.in.repository.EmployeeRepository;
@@ -21,12 +22,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
 	public EmployeeMapper employeeMapper;
+	
+	public JaxbJsonConverter jjc;
 
 	@Autowired
-	public EmployeeServiceImpl(EmployeeRepository employeeRepository,EmployeeMapper employeeMapper)
+	public EmployeeServiceImpl(EmployeeRepository employeeRepository,EmployeeMapper employeeMapper,JaxbJsonConverter jjc)
 	{
 		this.employeeRepository=employeeRepository;
 		this.employeeMapper=employeeMapper;
+		this.jjc=jjc;
 
 	}
 
@@ -39,8 +43,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 		log.info("Creating the employee object");
 		Employee createdEmployee=employeeRepository.save(employee);
 
+		// Convert POJO to JSON and store the output
+	    String json = convertPojoToJson(employeeBo);
+
+	    // Use the returned JSON string for converting back to POJO
+	    convertJsonToPojo(json);
 		log.info("Returning the the EmployeeBO object");
+		
 		return employeeMapper.toBO(createdEmployee);
+		
+		
 	}
 
 	@Override
@@ -61,5 +73,25 @@ public class EmployeeServiceImpl implements EmployeeService {
          .map(employeeMapper::toBO)
          .collect(Collectors.toList());
 	}
+	
+	public String convertPojoToJson(EmployeeBo emp) {
+        try {
+            String jsonString = jjc.convertPojoToJson(emp);
+            log.info("Converted POJO to JSON: {}", jsonString);
+            return jsonString;
+        } catch (Exception e) {
+            log.error("Error converting POJO to JSON", e);
+            return null;
+        }
+    }
+	
+	 public void convertJsonToPojo(String json) {
+	        try {
+	            EmployeeBo emp = jjc.convertJsonToPojo(json, EmployeeBo.class);
+	            log.info("Converted JSON to POJO: {}", emp);
+	        } catch (Exception e) {
+	            log.error("Error converting JSON to POJO", e);
+	        }
+	    }
 
 }
