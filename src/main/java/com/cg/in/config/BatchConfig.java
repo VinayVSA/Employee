@@ -17,6 +17,7 @@ import org.springframework.batch.item.file.transform.PassThroughFieldExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -29,10 +30,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 public class BatchConfig{
 
 	@Bean
+	//@Primary
     @Qualifier("h2ToCsvJob")
     public Job h2ToCsvJob(JobRepository jobRepository,
                          JobListener listener,
-                         Step h2ToCsvStep) {
+                         @Qualifier("h2ToCsvStep") Step h2ToCsvStep) {
         return new JobBuilder("H2ToCsvJob", jobRepository)
                 .incrementer(new RunIdIncrementer())
                 .listener(listener)
@@ -41,6 +43,7 @@ public class BatchConfig{
     }
 
     @Bean
+   // @Primary
     @Qualifier("h2ToCsvStep")
     public Step h2ToCsvStep(JobRepository jobRepository,
                            PlatformTransactionManager transactionManager,

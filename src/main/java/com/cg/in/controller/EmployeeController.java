@@ -43,13 +43,12 @@ public class EmployeeController {
 	private final JobLauncher jobLauncher;
 	
 	
-    private final Job importEmployeeJob;
+   
     
     @Autowired
-	public EmployeeController(EmployeeServiceImpl employeeService,JaxbJsonConverter jaxbJsonConverter,JobLauncher jobLauncher,Job importEmployeeJob)
+	public EmployeeController(EmployeeServiceImpl employeeService,JaxbJsonConverter jaxbJsonConverter,JobLauncher jobLauncher)
 	{
     	this.jobLauncher = jobLauncher;
-        this.importEmployeeJob = importEmployeeJob;
         this.employeeService = employeeService;
         this.jaxbJsonConverter = jaxbJsonConverter;
 	}
@@ -104,15 +103,7 @@ public class EmployeeController {
 //	        }
 //	    }
 	 
-	 @GetMapping("/trigger")
-	    public ResponseEntity<String> triggerJob() {
-	        try {
-	            jobLauncher.run(importEmployeeJob, new JobParametersBuilder().toJobParameters());
-	            return ResponseEntity.ok("Batch job triggered successfully.");
-	        } catch (Exception e) {
-	            return ResponseEntity.status(500).body("Failed to trigger batch job: " + e.getMessage());
-	        }
-	    }
+	 
 	    }
 
 	 

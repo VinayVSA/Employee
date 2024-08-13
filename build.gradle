@@ -88,6 +88,11 @@ dependencies {
     implementation 'org.springframework.batch:spring-batch-core'
     implementation 'org.apache.commons:commons-csv:1.11.0'
 
+    //GatLing Dependency
+    testImplementation 'io.gatling.highcharts:gatling-charts-highcharts:3.11.5'
+	testImplementation 'io.gatling:gatling-core:3.11.5'
+	testImplementation 'io.gatling:gatling-http:3.11.5'
+
 
 }
 
