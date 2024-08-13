@@ -19,7 +19,7 @@ import lombok.ToString;
 public class Employee {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int empId;
 	@Column
 	private String empName;

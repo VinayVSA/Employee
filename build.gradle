@@ -34,6 +34,7 @@ dependencies {
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
     testImplementation 'com.h2database:h2'
     
+    
     //testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.3'
    // testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.3'
 	testImplementation 'org.mockito:mockito-core:4.8.1'
@@ -74,6 +75,18 @@ dependencies {
     // Jackson dependencies for JSON conversion
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
     implementation 'com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.15.2'
+    
+   // implementation 'org.springframework.boot:spring-boot-starter-batch'
+  // implementation 'org.springframework.boot:spring-boot-starter-batch'
+   implementation 'com.h2database:h2'
+  // implementation 'org.springframework.batch:spring-batch-core:5.0.0'
+  
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+//    implementation 'org.springframework.batch:spring-batch-core:5.0.0'
+    testImplementation 'org.springframework.batch:spring-batch-test'
+    // CSV File Handling
+    implementation 'org.springframework.batch:spring-batch-core'
+    implementation 'org.apache.commons:commons-csv:1.11.0'
 
 
 }

@@ -2,6 +2,10 @@ package com.cg.in.controller;
 
 import java.util.List;
 
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +31,32 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/employee")
 @Validated
 public class EmployeeController {
-	@Autowired
+	
+
+	
 	private EmployeeServiceImpl employeeService;
 	
-	@Autowired
+
     private JaxbJsonConverter jaxbJsonConverter;
+	
+	
+	private final JobLauncher jobLauncher;
+	
+	
+    private final Job importEmployeeJob;
+    
+    @Autowired
+	public EmployeeController(EmployeeServiceImpl employeeService,JaxbJsonConverter jaxbJsonConverter,JobLauncher jobLauncher,Job importEmployeeJob)
+	{
+    	this.jobLauncher = jobLauncher;
+        this.importEmployeeJob = importEmployeeJob;
+        this.employeeService = employeeService;
+        this.jaxbJsonConverter = jaxbJsonConverter;
+	}
+	
+	
+	
+	
 
 	@PostMapping("/create")
 	public ResponseEntity<EmployeeBo> createEmployee(@Valid @RequestBody EmployeeBo employee)
@@ -78,7 +103,18 @@ public class EmployeeController {
 //	            return ResponseEntity.status(500).body(null);
 //	        }
 //	    }
+	 
+	 @GetMapping("/trigger")
+	    public ResponseEntity<String> triggerJob() {
+	        try {
+	            jobLauncher.run(importEmployeeJob, new JobParametersBuilder().toJobParameters());
+	            return ResponseEntity.ok("Batch job triggered successfully.");
+	        } catch (Exception e) {
+	            return ResponseEntity.status(500).body("Failed to trigger batch job: " + e.getMessage());
+	        }
+	    }
+	    }
 
 	 
 
-}
+
