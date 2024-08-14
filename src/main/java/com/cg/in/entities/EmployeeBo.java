@@ -1,5 +1,6 @@
 package com.cg.in.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import jakarta.validation.constraints.Min;
@@ -18,8 +19,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class EmployeeBo {
+public class EmployeeBo implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private int empId;
 	
 	@XmlElement

@@ -1,5 +1,7 @@
 package com.cg.in.entities;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,8 +18,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Entity
-public class Employee {
+public class Employee   {
 
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int empId;
