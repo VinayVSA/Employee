@@ -34,19 +34,7 @@ public class EmpReaderTasklet implements Tasklet {
 
 	    @Override
 	    public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-//	        if (employeeIterator == null) {
-//	        	List<Employee> employees = (List<Employee>) employeeRepository.findAll(); // Fetch employees from repository
-//	            List<EmployeeBo> employeeBos = employeeMapper.toBOList(employees); // Convert to EmployeeBo list
-//	            employeeIterator = employeeBos.iterator();
-//	        }
-//	        if (employeeIterator.hasNext()) {
-//	        	EmployeeBo employeeBo = employeeIterator.next();
-//	            chunkContext.getStepContext().getStepExecution().getJobExecution().getExecutionContext().put("employeeBo", employeeBo);
-//	        } else {
-//	            return RepeatStatus.FINISHED;
-//	        }
-//	        
-//	        return RepeatStatus.CONTINUABLE;
+        
 	    	List<Employee> employees = employeeRepository.findAll(); // Fetch employees from repository
 	        List<EmployeeBo> employeeBos = employeeMapper.toBOList(employees); // Convert to EmployeeBo list
 
